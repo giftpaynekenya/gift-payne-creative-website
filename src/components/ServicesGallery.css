@@ -1,0 +1,90 @@
+.services-parallax-container {
+    position: relative;
+    height: 300vh;
+}
+
+.services-parallax-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.service-parallax-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    transform-origin: center center;
+}
+
+.service-parallax-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.service-parallax-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.service-parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 4rem;
+}
+
+.service-parallax-content {
+    max-width: 800px;
+    color: #fff;
+}
+
+.service-parallax-subtitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.service-parallax-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-family: var(--font-display);
+    font-weight: 700;
+    margin: 0 0 1.5rem;
+    line-height: 1;
+}
+
+.service-parallax-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+    .service-parallax-overlay {
+        padding: 2rem;
+    }
+
+    .service-parallax-title {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+    }
+
+    .service-parallax-description {
+        font-size: 0.95rem;
+    }
+}
