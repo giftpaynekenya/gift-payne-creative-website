@@ -86,6 +86,17 @@ const ServicesGallery = () => {
             </div>
 
             <div className="services-luxury-container">
+                <div className="services-luxury-list">
+                    {services.map((service, index) => (
+                        <ServiceSection
+                            key={index}
+                            service={service}
+                            index={index}
+                            setActiveIndex={setActiveIndex}
+                        />
+                    ))}
+                </div>
+
                 <div className="services-luxury-images">
                     {services.map((service, index) => (
                         <motion.div
@@ -98,17 +109,6 @@ const ServicesGallery = () => {
                             <img src={service.image} alt={service.title} />
                             <div className="luxury-image-overlay" />
                         </motion.div>
-                    ))}
-                </div>
-
-                <div className="services-luxury-list">
-                    {services.map((service, index) => (
-                        <ServiceSection
-                            key={index}
-                            service={service}
-                            index={index}
-                            setActiveIndex={setActiveIndex}
-                        />
                     ))}
                 </div>
             </div>
