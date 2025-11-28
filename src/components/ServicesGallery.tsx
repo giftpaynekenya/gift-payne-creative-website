@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
 import './ServicesGallery.css';
 
 const services = [
@@ -47,59 +47,72 @@ const services = [
     }
 ];
 
-const ServicesGallery = () => {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
+const ServiceSection = ({ service, index, setActiveIndex }) => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { margin: "-50% 0px -50% 0px" });
+
+    useEffect(() => {
+        if (isInView) {
+            setActiveIndex(index);
+        }
+    }, [isInView, index, setActiveIndex]);
 
     return (
-        <div ref={containerRef} className="services-parallax-container">
-            <div className="services-parallax-sticky">
-                {services.map((service, index) => {
-                    const start = index / services.length;
-                    const end = (index + 1) / services.length;
+        <div ref={ref} className="luxury-service-item">
+            {/* Mobile Image - Visible only on mobile */}
+            <div className="luxury-mobile-image">
+                <img src={service.image} alt={service.title} />
+            </div>
 
-                    const scale = useTransform(
-                        scrollYProgress,
-                        [start, end],
-                        [1, 0.8]
-                    );
-
-                    const opacity = useTransform(
-                        scrollYProgress,
-                        [start, end - 0.1, end],
-                        [1, 1, 0]
-                    );
-
-                    return (
-                        <motion.div
-                            key={index}
-                            className="service-parallax-card"
-                            style={{
-                                scale,
-                                opacity,
-                                zIndex: services.length - index,
-                            }}
-                        >
-                            <div className="service-parallax-image">
-                                <img src={service.image} alt={service.title} />
-                            </div>
-                            <div className="service-parallax-overlay">
-                                <div className="service-parallax-content">
-                                    <span className="service-parallax-subtitle" style={{ color: service.color }}>
-                                        {service.subtitle}
-                                    </span>
-                                    <h3 className="service-parallax-title">{service.title}</h3>
-                                    <p className="service-parallax-description">{service.description}</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    );
-                })}
+            <div className="luxury-service-content">
+                <span className="luxury-service-subtitle" style={{ color: service.color }}>
+                    0{index + 1} — {service.subtitle}
+                </span>
+                <h3 className="luxury-service-title">{service.title}</h3>
+                <p className="luxury-service-description">{service.description}</p>
             </div>
         </div>
+    );
+};
+
+const ServicesGallery = () => {
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    return (
+        <section className="services-luxury">
+            <div className="services-luxury-header">
+                <span className="services-luxury-label">OUR EXPERTISE</span>
+                <h2 className="services-luxury-heading">WHAT WE DO</h2>
+            </div>
+
+            <div className="services-luxury-container">
+                <div className="services-luxury-images">
+                    {services.map((service, index) => (
+                        <motion.div
+                            key={index}
+                            className="luxury-image-wrapper"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: activeIndex === index ? 1 : 0 }}
+                            transition={{ duration: 0.7, ease: "easeInOut" }}
+                        >
+                            <img src={service.image} alt={service.title} />
+                            <div className="luxury-image-overlay" />
+                        </motion.div>
+                    ))}
+                </div>
+
+                <div className="services-luxury-list">
+                    {services.map((service, index) => (
+                        <ServiceSection
+                            key={index}
+                            service={service}
+                            index={index}
+                            setActiveIndex={setActiveIndex}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
     );
 };
 

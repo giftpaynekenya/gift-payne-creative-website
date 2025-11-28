@@ -1,27 +1,48 @@
-.services-parallax-container {
-    position: relative;
-    height: 300vh;
+.services-luxury {
+    background-color: #fff;
+    padding-top: 6rem;
 }
 
-.services-parallax-sticky {
+.services-luxury-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 0 2rem;
+}
+
+.services-luxury-label {
+    color: var(--color-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.services-luxury-heading {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-family: var(--font-display);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+    color: var(--color-text);
+}
+
+.services-luxury-container {
+    display: flex;
+    position: relative;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.services-luxury-images {
+    width: 50%;
+    height: 100vh;
     position: sticky;
     top: 0;
-    height: 100vh;
     overflow: hidden;
 }
 
-.service-parallax-card {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-    overflow: hidden;
-    transform-origin: center center;
-}
-
-.service-parallax-image {
+.luxury-image-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -29,62 +50,109 @@
     height: 100%;
 }
 
-.service-parallax-image img {
+.luxury-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.service-parallax-overlay {
+.luxury-image-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.services-luxury-list {
+    width: 50%;
+    padding-bottom: 20vh;
+}
+
+.luxury-service-item {
+    min-height: 80vh;
     display: flex;
-    align-items: flex-end;
-    padding: 4rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 6rem;
+    box-sizing: border-box;
 }
 
-.service-parallax-content {
-    max-width: 800px;
-    color: #fff;
+.luxury-mobile-image {
+    display: none;
+    /* Hidden on desktop */
+    width: 100%;
+    height: 300px;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
 }
 
-.service-parallax-subtitle {
+.luxury-mobile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.luxury-service-content {
+    max-width: 500px;
+}
+
+.luxury-service-subtitle {
     font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 2px;
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
 }
 
-.service-parallax-title {
-    font-size: clamp(2rem, 5vw, 4rem);
+.luxury-service-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
     font-family: var(--font-display);
     font-weight: 700;
-    margin: 0 0 1.5rem;
-    line-height: 1;
+    margin: 0 0 2rem;
+    line-height: 1.1;
+    color: #000;
 }
 
-.service-parallax-description {
+.luxury-service-description {
     font-size: 1.1rem;
-    line-height: 1.6;
-    opacity: 0.95;
+    line-height: 1.8;
+    color: #555;
+    font-weight: 300;
 }
 
-@media (max-width: 768px) {
-    .service-parallax-overlay {
-        padding: 2rem;
+@media (max-width: 1024px) {
+    .services-luxury-container {
+        display: block;
     }
 
-    .service-parallax-title {
-        font-size: clamp(1.5rem, 6vw, 2.5rem);
+    .services-luxury-images {
+        display: none;
+        /* Hide sticky images on mobile */
     }
 
-    .service-parallax-description {
-        font-size: 0.95rem;
+    .services-luxury-list {
+        width: 100%;
+        padding: 0 1.5rem 4rem;
+    }
+
+    .luxury-service-item {
+        min-height: auto;
+        padding: 4rem 0;
+        border-bottom: 1px solid #eee;
+        display: block;
+        /* Reset flex */
+    }
+
+    .luxury-mobile-image {
+        display: block;
+        /* Show on mobile */
+    }
+
+    .luxury-service-content {
+        max-width: 100%;
     }
 }
