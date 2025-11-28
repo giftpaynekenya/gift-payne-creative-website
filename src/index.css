@@ -1,0 +1,49 @@
+:root {
+  --color-bg: #ffffff;
+  --color-text: #0a0a0a;
+  --color-primary: #FFD700;
+  --color-secondary: #FF0055;
+  --color-accent: #7000FF;
+  --color-neon-green: #39FF14;
+
+  --font-main: 'Inter', sans-serif;
+  --font-display: 'Oswald', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: var(--font-main);
+}
