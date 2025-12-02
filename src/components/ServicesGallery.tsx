@@ -6,7 +6,7 @@ import imgDocumentary from '../assets/images/IMG20210625153910.jpg';
 import imgLiveShow from '../assets/images/IMG20231102181252.jpg';
 import imgCommercial from '../assets/images/IMG20220128092811.jpg';
 import imgMusicVideo from '../assets/images/IMG20210625174528.jpg';
-import imgPhotography from '../assets/images/IMG_5713.jpg';
+import imgPhotography from '../assets/images/20200612_150028.jpg';
 import imgBrand from '../assets/images/IMG20231028150958.jpg';
 
 interface Service {

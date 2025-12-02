@@ -5,7 +5,7 @@ import { ZoomParallax } from './ZoomParallax';
 import { TextRotate } from './ui/text-rotate';
 import './Hero.css';
 
-import showreelVideo from '../assets/images/RONALD MWAROGOS SHOWREEL - ronald mwarogo (720p, h264).webm';
+import showreelVideo from '../assets/images/RONALD MWAROGOS SHOWREEL - ronald mwarogo (720p, h264).mp4';
 import img2 from '../assets/images/IMG20220221101126.jpg';
 import img3 from '../assets/images/IMG20231028150958.jpg';
 import img4 from '../assets/images/IMG20231028144732.jpg';
