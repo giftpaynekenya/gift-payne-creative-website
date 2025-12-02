@@ -1,4 +1,4 @@
-import { useScroll, useTransform, motion } from 'framer-motion';
+import { useScroll, useTransform, motion, useSpring } from 'framer-motion';
 import { useRef } from 'react';
 
 interface Image {
@@ -18,17 +18,32 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
         offset: ['start start', 'end end'],
     });
 
-    const scale4 = useTransform(scrollYProgress, [0, 1], [1, 4]);
-    const scale5 = useTransform(scrollYProgress, [0, 1], [1, 5]);
-    const scale6 = useTransform(scrollYProgress, [0, 1], [1, 6]);
-    const scale8 = useTransform(scrollYProgress, [0, 1], [1, 8]);
-    const scale9 = useTransform(scrollYProgress, [0, 1], [1, 9]);
+    // Ultra smooth spring physics
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 80,
+        damping: 40,
+        restDelta: 0.001,
+        mass: 0.5
+    });
+
+    // Original scale ranges for full screen coverage
+    const scale4 = useTransform(smoothProgress, [0, 1], [1, 4]);
+    const scale5 = useTransform(smoothProgress, [0, 1], [1, 5]);
+    const scale6 = useTransform(smoothProgress, [0, 1], [1, 6]);
+    const scale8 = useTransform(smoothProgress, [0, 1], [1, 8]);
+    const scale9 = useTransform(smoothProgress, [0, 1], [1, 9]);
 
     const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
 
     return (
         <div ref={container} style={{ position: 'relative', height: '300vh' }}>
-            <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
+            <div style={{
+                position: 'sticky',
+                top: 0,
+                height: '100vh',
+                overflow: 'hidden',
+                willChange: 'transform'
+            }}>
                 {images.map(({ src, alt, isVideo }, index) => {
                     const scale = scales[index % scales.length];
 
@@ -57,6 +72,8 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
+                                willChange: 'transform',
+                                transform: 'translate3d(0, 0, 0)', // Force GPU acceleration
                             }}
                         >
                             <div
@@ -64,6 +81,8 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                                     position: 'relative',
                                     height: '25vh',
                                     width: '25vw',
+                                    willChange: 'transform',
+                                    backfaceVisibility: 'hidden', // Prevent flickering
                                     ...getPositionStyles(index),
                                 }}
                             >
@@ -79,6 +98,8 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                                             width: '100%',
                                             height: '100%',
                                             objectFit: 'cover',
+                                            willChange: 'transform',
+                                            transform: 'translate3d(0, 0, 0)',
                                         }}
                                     />
                                 ) : (
@@ -91,6 +112,8 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                                             width: '100%',
                                             height: '100%',
                                             objectFit: 'cover',
+                                            willChange: 'transform',
+                                            transform: 'translate3d(0, 0, 0)',
                                         }}
                                     />
                                 )}

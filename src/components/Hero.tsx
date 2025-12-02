@@ -1,8 +1,7 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { ZoomParallax } from './ZoomParallax';
 
-import { TextRotate } from './ui/text-rotate';
 import './Hero.css';
 
 import showreelVideo from '../assets/images/RONALD MWAROGOS SHOWREEL - ronald mwarogo (720p, h264).mp4';
@@ -15,6 +14,22 @@ import img7 from '../assets/images/IMG20231115114642.jpg';
 
 const Hero = () => {
     const containerRef = useRef(null);
+    const [currentTextIndex, setCurrentTextIndex] = useState(0);
+
+    const texts = [
+        "Trust & Reliability",
+        "Obsessive Curiosity",
+        "Making Magic Happen",
+        "Authenticity",
+        "Going Above & Beyond"
+    ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTextIndex((prev) => (prev + 1) % texts.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -82,6 +97,7 @@ const Hero = () => {
                         textAlign: 'center',
                         padding: '0 2rem',
                         maxWidth: '1200px',
+                        width: '100%',
                     }}
                 >
                     <motion.div
@@ -89,26 +105,70 @@ const Hero = () => {
                             opacity: textOpacity,
                             y: textY,
                             marginBottom: '2rem',
+                            minHeight: '120px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                         }}
                     >
-                        <TextRotate
-                            texts={[
-                                "Trust & Reliability",
-                                "Obsessive Curiosity",
-                                "Making Magic Happen",
-                                "Authenticity",
-                                "Going Above & Beyond"
-                            ]}
-                            mainClassName="hero-rotating-text"
-                            staggerFrom="last"
-                            initial={{ y: "40%", opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: "-40%", opacity: 0 }}
-                            staggerDuration={0.05}
-                            splitLevelClassName="hero-rotating-word"
-                            transition={{ type: "spring", damping: 24, stiffness: 260 }}
-                            rotationInterval={3000}
-                        />
+                        <AnimatePresence mode="wait">
+                            <motion.h1
+                                key={currentTextIndex}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.5, ease: "easeInOut" }}
+                                style={{
+                                    fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+                                    fontWeight: 700,
+                                    margin: 0,
+                                    textAlign: 'center',
+                                    width: '100%',
+                                }}
+                            >
+                                {currentTextIndex === 0 && (
+                                    <>
+                                        <span style={{ color: '#fff' }}>Trust & </span>
+                                        <span style={{ color: 'var(--color-primary)' }}>Reliability</span>
+                                    </>
+                                )}
+                                {currentTextIndex === 1 && (
+                                    <>
+                                        <span style={{
+                                            color: 'transparent',
+                                            WebkitTextStroke: '2px #fff'
+                                        }}>Obsessive </span>
+                                        <span style={{ color: 'var(--color-primary)' }}>Curiosity</span>
+                                    </>
+                                )}
+                                {currentTextIndex === 2 && (
+                                    <>
+                                        <span style={{ color: 'var(--color-primary)' }}>Making </span>
+                                        <span style={{
+                                            color: 'transparent',
+                                            WebkitTextStroke: '2px var(--color-primary)'
+                                        }}>Magic </span>
+                                        <span style={{ color: '#fff' }}>Happen</span>
+                                    </>
+                                )}
+                                {currentTextIndex === 3 && (
+                                    <span style={{
+                                        color: 'transparent',
+                                        WebkitTextStroke: '2px var(--color-primary)'
+                                    }}>Authenticity</span>
+                                )}
+                                {currentTextIndex === 4 && (
+                                    <>
+                                        <span style={{ color: '#fff' }}>Going </span>
+                                        <span style={{
+                                            color: 'transparent',
+                                            WebkitTextStroke: '2px #fff'
+                                        }}>Above & </span>
+                                        <span style={{ color: 'var(--color-primary)' }}>Beyond</span>
+                                    </>
+                                )}
+                            </motion.h1>
+                        </AnimatePresence>
                     </motion.div>
 
                     <motion.p
@@ -117,7 +177,7 @@ const Hero = () => {
                             y: textY,
                             fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
                             maxWidth: '800px',
-                            margin: '0 auto 3rem',
+                            margin: '0 auto',
                             color: 'rgba(255, 255, 255, 0.9)',
                         }}
                     >
