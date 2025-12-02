@@ -74,6 +74,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                                         loop
                                         muted
                                         playsInline
+                                        preload="metadata"
                                         style={{
                                             width: '100%',
                                             height: '100%',
@@ -84,6 +85,8 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                                     <img
                                         src={src || '/placeholder.svg'}
                                         alt={alt || `Parallax image ${index + 1}`}
+                                        loading="lazy"
+                                        decoding="async"
                                         style={{
                                             width: '100%',
                                             height: '100%',
