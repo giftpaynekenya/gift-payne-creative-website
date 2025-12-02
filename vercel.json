@@ -3,16 +3,6 @@
     "outputDirectory": "dist",
     "devCommand": "npm run dev",
     "installCommand": "npm install",
-    "routes": [
-        {
-            "src": "/sitemap.xml",
-            "dest": "/sitemap.xml"
-        },
-        {
-            "src": "/robots.txt",
-            "dest": "/robots.txt"
-        }
-    ],
     "headers": [
         {
             "source": "/sitemap.xml",
