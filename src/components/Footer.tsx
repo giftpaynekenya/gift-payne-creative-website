@@ -21,7 +21,7 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-brand-large">
-                    <h1>Gift Payne</h1>
+                    <h1>Gift Payne Creative</h1>
                 </div>
 
                 <div className="footer-bottom">
