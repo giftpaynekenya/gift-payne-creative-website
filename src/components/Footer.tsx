@@ -14,6 +14,7 @@ const Footer = () => {
                             <h4>Contact</h4>
                             <a href="mailto:giftpaynekenya@gmail.com">giftpaynekenya@gmail.com</a>
                             <a href="tel:+254775303909">+254 775 303 909</a>
+                            <a href="tel:+254719637224">+254 719 637 224</a>
                             <a href="#">Nairobi, Kenya</a>
                         </div>
                     </div>
